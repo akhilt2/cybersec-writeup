@@ -9,10 +9,10 @@ draft = false
 ### L01.apk
 First, I went with the android binary L01.apk. I used an online decompiler called [Decopiler.com](https://www.decompiler.com/) to decompile the apk file. The decompiled files are available [here](https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk).
 In the [MainActivity.java](https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/uncrackable1/MainActivity.java) file, I found that an alert box is made and its value is set to "This is the correct secret." or "That's not it. Try again." by checking a.a(obj).
-![MainActivity.java of L01.apk](/reverse-engineering/mainactivity-L01.png)
+![MainActivity.java of L01.apk](/cybersec-writeup/reverse-engineering/mainactivity-L01.png)
 We can see that a.a is a function in [a.java](https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/a/a.java) file. The function uses aes decryption algorithm and gets the flag from the encrypted string.
 The [a.java](https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/uncrackable1/a.java) inside the uncrackable1 directory contains the encrypted message and the key used for decryption.
-![a.java of L01.apk](/reverse-engineering/a-L01.png)
+![a.java of L01.apk](/cybersec-writeup/reverse-engineering/a-L01.png)
 I asked ChatGPT to decrypt the message. The prompt is as follows:
 ```
   package sg.vantagepoint.a;
@@ -69,6 +69,6 @@ class AESDecrypt {
 ```
 
 I ran this code in [TuxCode](https://tuxcode.fosscell.org) which is an online compiler made by me, Rehan Tadpathri and Harshan during CodeInit 2025.
-![Decrypted Message](/reverse-engineering/tuxcode-L01.png)
+![Decrypted Message](/cybersec-writeup/reverse-engineering/tuxcode-L01.png)
 
 Thus I got the flag for L01.apk as *`I want to believe`*.

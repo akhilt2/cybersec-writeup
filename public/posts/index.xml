@@ -13,7 +13,7 @@
       <link>http://localhost:1313/posts/reverse-engineering/</link>
       <pubDate>Thu, 30 Jan 2025 13:09:06 +0530</pubDate>
       <guid>http://localhost:1313/posts/reverse-engineering/</guid>
-      <description>Task 1: Reverse Engineering </description>
+      <description>Android Binaries L01.apk First, I went with the android binary L01.apk. I used an online decompiler called Decopiler.com to decompile the apk file. The decompiled files are available here. In the MainActivity.java file, I found that an alert box is made and its value is set to &amp;ldquo;This is the correct secret.&amp;rdquo; or &amp;ldquo;That&amp;rsquo;s not it. Try again.&amp;rdquo; by checking a.a(obj). We can see that a.a is a function in a.</description>
     </item>
   </channel>
 </rss>
