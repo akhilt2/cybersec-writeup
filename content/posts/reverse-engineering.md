@@ -2,7 +2,7 @@
 title = 'Task 1: Reverse Engineering'
 date = 2025-01-30T13:09:06+05:30
 author = 'Akhil T'
-draft = true
+draft = false
 +++
 
 ## Android Binaries
