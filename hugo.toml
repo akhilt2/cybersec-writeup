@@ -1,4 +1,4 @@
-baseURL = 'https://akhilt2.github.io/cybersec-writeup/'
+baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'Cyber Security Club Inductions Task Writeup by Akhil T'
 theme = 'PaperMod'
