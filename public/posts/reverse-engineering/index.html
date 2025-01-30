@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Task 1: Reverse Engineering | Cyber Security Club Inductions Task Writeup by Akhil T</title>
+<meta name="keywords" content="">
+<meta name="description" content="Android Binaries L01.apk First, I went with the android binary L01.apk. I used an online decompiler called Decopiler.com to decompile the apk file. The decompiled files are available here. In the MainActivity.java file, I found that an alert box is made and its value is set to &ldquo;This is the correct secret.&rdquo; or &ldquo;That&rsquo;s not it. Try again.&rdquo; by checking a.a(obj). We can see that a.a is a function in a.">
+<meta name="author" content="Akhil T">
+<link rel="canonical" href="http://localhost:1313/posts/reverse-engineering/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/reverse-engineering/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Cyber Security Club Inductions Task Writeup by Akhil T (Alt + H)">Cyber Security Club Inductions Task Writeup by Akhil T</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Task 1: Reverse Engineering
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2025-01-30 13:09:06 +0530 IST'>January 30, 2025</span>&nbsp;·&nbsp;Akhil T
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="android-binaries">Android Binaries<a hidden class="anchor" aria-hidden="true" href="#android-binaries">#</a></h2>
+<h3 id="l01apk">L01.apk<a hidden class="anchor" aria-hidden="true" href="#l01apk">#</a></h3>
+<p>First, I went with the android binary L01.apk. I used an online decompiler called <a href="https://www.decompiler.com/">Decopiler.com</a> to decompile the apk file. The decompiled files are available <a href="https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk">here</a>.
+In the <a href="https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/uncrackable1/MainActivity.java">MainActivity.java</a> file, I found that an alert box is made and its value is set to &ldquo;This is the correct secret.&rdquo; or &ldquo;That&rsquo;s not it. Try again.&rdquo; by checking a.a(obj).
+<img alt="MainActivity.java of L01.apk" loading="lazy" src="/reverse-engineering/mainactivity-L01.png">
+We can see that a.a is a function in <a href="https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/a/a.java">a.java</a> file. The function uses aes decryption algorithm and gets the flag from the encrypted string.
+The <a href="https://www.decompiler.com/jar/bef9713f757940b590d0bfbd6111c3f0/L01.apk/sources/sg/vantagepoint/uncrackable1/a.java">a.java</a> inside the uncrackable1 directory contains the encrypted message and the key used for decryption.
+<img alt="a.java of L01.apk" loading="lazy" src="/reverse-engineering/a-L01.png">
+I asked ChatGPT to decrypt the message. The prompt is as follows:</p>
+<pre tabindex="0"><code>  package sg.vantagepoint.a;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
+public class a {
+    public static byte[] a(byte[] bArr, byte[] bArr2) {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(bArr, &#34;AES/ECB/PKCS7Padding&#34;);
+        Cipher instance = Cipher.getInstance(&#34;AES&#34;);
+        instance.init(2, secretKeySpec);
+        return instance.doFinal(bArr2);
+    }
+}
+
+bArr = sg.vantagepoint.a.a.a(b(&#34;8d127684cbc37c17616d806cf50473cc&#34;), Base64.decode(&#34;5UJiFctbmgbDoLXmpL12mkno8HT4Lv8dlat8FxR2GOc=&#34;, 0));
+
+I need to get the value of bArr
+</code></pre><p>It gave a java program to decrypt the message. The code is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.spec.SecretKeySpec;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AESDecrypt</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> key <span style="color:#f92672">=</span> hexStringToByteArray(<span style="color:#e6db74">&#34;8d127684cbc37c17616d806cf50473cc&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedData <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(<span style="color:#e6db74">&#34;5UJiFctbmgbDoLXmpL12mkno8HT4Lv8dlat8FxR2GOc=&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedData <span style="color:#f92672">=</span> decryptAES(key, encryptedData);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#66d9ef">new</span> String(decryptedData)); <span style="color:#75715e">// Output the decrypted value</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">decryptAES</span>(<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> key, <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> data) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        SecretKeySpec secretKeySpec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SecretKeySpec(key, <span style="color:#e6db74">&#34;AES&#34;</span>);
+</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, secretKeySpec);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cipher.<span style="color:#a6e22e">doFinal</span>(data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">hexStringToByteArray</span>(String hex) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> hex.<span style="color:#a6e22e">length</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> data <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>len <span style="color:#f92672">/</span> 2<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> len; i <span style="color:#f92672">+=</span> 2) {
+</span></span><span style="display:flex;"><span>            data<span style="color:#f92672">[</span>i <span style="color:#f92672">/</span> 2<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">byte</span>) ((Character.<span style="color:#a6e22e">digit</span>(hex.<span style="color:#a6e22e">charAt</span>(i), 16) <span style="color:#f92672">&lt;&lt;</span> 4)
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">+</span> Character.<span style="color:#a6e22e">digit</span>(hex.<span style="color:#a6e22e">charAt</span>(i<span style="color:#f92672">+</span>1), 16));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> data;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I ran this code in <a href="https://tuxcode.fosscell.org">TuxCode</a> which is an online compiler made by me, Rehan Tadpathri and Harshan during CodeInit 2025.
+<img alt="Decrypted Message" loading="lazy" src="/reverse-engineering/tuxcode-L01.png"></p>
+<p>Thus I got the flag for L01.apk as <em><code>I want to believe</code></em>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Cyber Security Club Inductions Task Writeup by Akhil T</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
