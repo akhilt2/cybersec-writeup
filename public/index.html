@@ -107,6 +107,19 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Task 4: Networking
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>To setup inter-site VPN connection, I have used pfSense as the VPN server running on qemu and two alpine linux VMs (alpine1 and alpine2) as clients which are also running in qemu. The network topology is such that the two alpine VMs are connected to the pfSense VM through a bridge network. The network topology is as shown below:
+&#43;---------------------&#43; &#43;---------------------&#43; &#43;---------------------&#43; | | | | | | | Alpine VM1 | | pfSense VM | | Alpine VM2 | | | | | | | &#43;---------------------&#43; &#43;---------------------&#43; &#43;---------------------&#43; ^ ^ ^ ^ | | | | &#43;----------------------------&#43; &#43;----------------&#43; I am using WireGuard VPN protocol for setting up the VPN connection....</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-01-30 23:56:46 +0530 IST'>January 30, 2025</span>&nbsp;·&nbsp;Akhil T</footer>
+  <a class="entry-link" aria-label="post link to Task 4: Networking" href="http://localhost:1313/posts/networking/networking/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Task 1: Reverse Engineering
     </h2>
   </header>
@@ -114,7 +127,7 @@
     <p>Android Binaries L01.apk First, I went with the android binary L01.apk. I used an online decompiler called Decopiler.com to decompile the apk file. The decompiled files are available here. In the MainActivity.java file, I found that an alert box is made and its value is set to “This is the correct secret.” or “That’s not it. Try again.” by checking a.a(obj). We can see that a.a is a function in a....</p>
   </div>
   <footer class="entry-footer"><span title='2025-01-30 13:09:06 +0530 IST'>January 30, 2025</span>&nbsp;·&nbsp;Akhil T</footer>
-  <a class="entry-link" aria-label="post link to Task 1: Reverse Engineering" href="http://localhost:1313/posts/reverse-engineering/"></a>
+  <a class="entry-link" aria-label="post link to Task 1: Reverse Engineering" href="http://localhost:1313/posts/reverse-engineering/reverse-engineering/"></a>
 </article>
     </main>
     
